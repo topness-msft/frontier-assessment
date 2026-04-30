@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0EXP04CC8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-L0EXP04CC8');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frontier Transformation Readiness Assessment</title>
@@ -2666,25 +2658,6 @@ function renderPhase4() {
   const overallName = levelNames[Math.min(500, Math.max(100, Math.round(overall/100)*100))];
   const patternName = patternTargets[state.suggestedPattern]?.name || '';
   const answeredCount = state.engine.getProgress().answered;
-
-  // Log completion to Google Analytics (skip in demo mode)
-  const raiScoreForGA = state.engine.getRaiScore();
-  if (!state.isDemo) {
-    gtag('event', 'assessment_complete', {
-      pattern: patternName,
-      pattern_id: state.suggestedPattern,
-      overall_score: overall,
-      overall_level: overallName,
-      pillar_1_score: scores[0],
-      pillar_2_score: scores[1],
-      pillar_3_score: scores[2],
-      pillar_4_score: scores[3],
-      pillar_5_score: scores[4],
-      rai_score: raiScoreForGA || 0,
-      questions_answered: answeredCount,
-      duration_seconds: state.startedAt ? Math.round((Date.now() - state.startedAt) / 1000) : 0
-    });
-  }
 
   // Build compact pillar status rows
   let pillarRows = pillars.map((p, i) => {
